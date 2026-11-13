@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f6f8">
-  <title>KingsData Ghana — Data, made easy</title>
+  <title>King'sData Ghana — Data, made easy</title>
   <style>
     /* Shared colors keep the landing page close to the live store's palette. */
     :root {
@@ -104,26 +104,6 @@
     h1 em { color: var(--green); font-style: normal; }
     .intro { max-width: 440px; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.75; }
 
-    .proof { display: flex; align-items: center; gap: 12px; margin-top: 30px; color: #58665c; font-size: 12px; font-weight: 600; }
-    .avatars { display: flex; padding-left: 2px; }
-    .avatar {
-      display: grid;
-      width: 29px;
-      height: 29px;
-      margin-left: -3px;
-      place-items: center;
-      border: 2px solid var(--paper);
-      border-radius: 50%;
-      background: #d7edbd;
-      color: #35533c;
-      font-size: 9px;
-      font-weight: 800;
-    }
-    .avatar:nth-child(2) { background: #f0d7b8; }
-    .avatar:nth-child(3) { background: #d8d8f3; }
-    .avatar:nth-child(4) { background: #f0caca; }
-    .stars { color: #e9a72c; letter-spacing: 1px; }
-
     .order-card {
       position: relative;
       padding: 28px;
@@ -188,9 +168,12 @@
     .trust-icon { display: grid; width: 37px; height: 37px; flex: 0 0 37px; place-items: center; border-radius: 11px; background: #f0f6e8; color: var(--green); }
     .trust-icon svg { width: 18px; height: 18px; }
     .trust-item strong { display: block; font-size: 11px; }
-    .trust-item span { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; }
+    .trust-item > div > span { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; }
+    .trust-item a { text-decoration: underline; text-underline-offset: 2px; }
 
     footer { display: flex; justify-content: space-between; gap: 20px; padding: 29px 0; color: #7a867d; font-size: 10px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 16px; }
+    .footer-links a:hover { color: var(--green-dark); }
     footer .brand { color: var(--ink); font-size: 13px; }
     footer .brand-mark { width: 25px; height: 25px; border-radius: 8px; }
     footer .brand-mark svg { width: 15px; height: 15px; }
@@ -222,47 +205,41 @@
   <div class="shell">
     <!-- Site logo and navigation links. -->
     <header>
-      <a class="brand" href="#" aria-label="KingsData Ghana home">
+      <a class="brand" href="#" aria-label="King'sData Ghana home">
         <span class="brand-mark" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none"><path d="M5 8.5a10 10 0 0 1 14 0M8 11.5a5.7 5.7 0 0 1 8 0M11 14.5a1.5 1.5 0 0 1 2 0M12 18h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
         </span>
-        <span>Kings<span>Data</span></span>
+        <span>King's<span>Data</span></span>
       </a>
       <nav aria-label="Main navigation">
         <a href="#how-it-works">How it works</a>
         <a href="#networks">Networks</a>
-        <a class="nav-help" href="mailto:hello@kingsdata.example">
+        <a class="nav-help" href="mailto:emmanuelohene98771@gmail.com">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5.5h16v13H4zM4 7l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
-          Get help
+          Email support
         </a>
       </nav>
     </header>
 
     <main>
-      <!-- Intro copy and a direct link to the live KingsData store. -->
+      <!-- Intro copy and a direct link to the live King'sData store. -->
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
           <div class="eyebrow"><span class="eyebrow-dot"></span> Your data, your way</div>
           <h1 id="hero-title">Stay connected.<br><em>Stay going.</em></h1>
-          <p class="intro">Get data bundles for your favourite Ghanaian network in just a few taps. Simple, secure, and ready when you are.</p>
-          <div class="proof">
-            <div class="avatars" aria-hidden="true">
-              <span class="avatar">AK</span><span class="avatar">EO</span><span class="avatar">MA</span><span class="avatar">KJ</span>
-            </div>
-            <span><span class="stars" aria-label="5 out of 5 stars">★★★★★</span> <span>Made for everyday Ghana</span></span>
-          </div>
+          <p class="intro">Browse current data bundles, then place your order on the King'sData store.</p>
         </div>
 
         <section class="order-card" aria-labelledby="order-title">
           <div class="card-heading">
             <div>
               <h2 id="order-title">Shop data bundles</h2>
-              <p>Browse live bundles and complete your order in the KingsData store.</p>
+              <p>Browse live bundles and complete your order in the King'sData store.</p>
             </div>
           </div>
 
           <!-- Use the same public network logo assets displayed by the store. -->
-          <div class="networks" id="networks" aria-label="Networks on the KingsData store">
+          <div class="networks" id="networks" aria-label="Networks on the King'sData store">
             <div class="network"><img class="network-logo" src="https://smartdatahubgh.com/storage/logos/networks/network-9d33700e-a284-436e-a01d-fb16b1595ac3-1771251267.jpeg" alt="" referrerpolicy="no-referrer"> MTN</div>
             <div class="network"><img class="network-logo" src="https://smartdatahubgh.com/storage/logos/networks/network-05ef0777-4590-42bd-ab1a-cd9bdd658ed9-1771278323.png" alt="" referrerpolicy="no-referrer"> AirtelTigo</div>
             <div class="network"><img class="network-logo" src="https://smartdatahubgh.com/storage/logos/networks/network-cabfdeff-49e5-4ad8-83e7-b8b39954e3bb-1771278269.png" alt="" referrerpolicy="no-referrer"> Vodafone</div>
@@ -277,32 +254,37 @@
         </section>
       </section>
 
-      <!-- Quick benefits shown below the store link. -->
-      <section class="trust-row" id="how-it-works" aria-label="Why choose KingsData">
+      <!-- Practical details replace unverified ratings and privacy claims. -->
+      <section class="trust-row" id="how-it-works" aria-label="How to shop with King'sData">
         <div class="trust-item">
           <span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 5 13h6l-1 9 9-12h-6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
-          <div><strong>Quick &amp; easy</strong><span>A few taps to stay connected</span></div>
+          <div><strong>Current bundles</strong><span>See available offers in the store</span></div>
         </div>
         <div class="trust-item">
-          <span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 19 6v5c0 5-3 8-7 10-4-2-7-5-7-10V6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <div><strong>Peace of mind</strong><span>Your details stay yours</span></div>
+          <span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13m-5-5 5 5-5 5M4 5v14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><strong>Store checkout</strong><span>Orders and payments happen there</span></div>
         </div>
         <div class="trust-item">
-          <span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4zM4 10h16m-12 4h3" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
-          <div><strong>Pay your way</strong><span>Payment options at checkout</span></div>
+          <span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4zM4 7l8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+          <div><strong>Need help?</strong><span><a href="mailto:emmanuelohene98771@gmail.com">Email support</a></span></div>
         </div>
       </section>
     </main>
 
     <footer>
-      <a class="brand" href="#" aria-label="KingsData Ghana home">
+      <a class="brand" href="#" aria-label="King'sData Ghana home">
         <span class="brand-mark" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none"><path d="M5 8.5a10 10 0 0 1 14 0M8 11.5a5.7 5.7 0 0 1 8 0M11 14.5a1.5 1.5 0 0 1 2 0M12 18h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
         </span>
-        <span>Kings<span>Data</span></span>
+        <span>King's<span>Data</span></span>
       </a>
-      <span>© 2026 KingsData Ghana. Orders and payments are completed on the KingsData store.</span>
-      <a href="#networks">MTN · AirtelTigo · Vodafone</a>
+      <span>© 2026 King'sData Ghana. Orders and payments are completed on the King'sData store.</span>
+      <!-- The store publishes its policy links in its own footer. -->
+      <div class="footer-links">
+        <a href="#networks">Networks</a>
+        <a href="mailto:emmanuelohene98771@gmail.com">Email support</a>
+        <a href="https://king-sdata.quickdatabundle.com/" target="_blank" rel="noopener noreferrer" aria-label="Open the King'sData store to view its Privacy Policy and Terms of Service">Privacy &amp; terms on store</a>
+      </div>
     </footer>
   </div>
 
