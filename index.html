@@ -20,6 +20,34 @@
       --white: #fff;
       --line: #e5e6eb;
       --shadow: 0 24px 70px rgba(28, 31, 40, .1);
+      --card-border: rgba(22, 65, 41, .07);
+      --nav-ink: #536159;
+      --network-ink: #46534b;
+      --badge-bg: #fff8dc;
+      --badge-border: #f0d978;
+      --badge-ink: #594800;
+      --panel-bg: rgba(255,255,255,.72);
+      --icon-bg: #f0f6e8;
+      --game-bg: #e9efe4;
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --ink: #edf0eb;
+      --muted: #a9b2aa;
+      --paper: #131914;
+      --white: #1c251e;
+      --line: #39443b;
+      --shadow: 0 24px 70px rgba(0, 0, 0, .35);
+      --card-border: rgba(220, 245, 225, .12);
+      --nav-ink: #c1ccc3;
+      --network-ink: #e2ebe3;
+      --badge-bg: #302d1d;
+      --badge-border: #675a24;
+      --badge-ink: #f4dc79;
+      --panel-bg: rgba(28,37,30,.8);
+      --icon-bg: #28372b;
+      --game-bg: #131a15;
     }
 
     * { box-sizing: border-box; }
@@ -51,7 +79,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 max(calc((100vw - 1120px) / 2), 24px);
-      border-bottom: 1px solid #e8e8ec;
+      border-bottom: 1px solid var(--line);
       background: var(--white);
     }
 
@@ -68,10 +96,26 @@
     .brand-mark svg { width: 20px; height: 20px; }
     .brand span span { color: var(--green); }
 
-    nav { display: flex; align-items: center; gap: 34px; color: #536159; font-size: 13px; font-weight: 600; }
+    nav { display: flex; align-items: center; gap: 34px; color: var(--nav-ink); font-size: 13px; font-weight: 600; }
     nav a:hover { color: var(--green); }
     .nav-help { display: inline-flex; align-items: center; gap: 8px; }
     .nav-help svg { width: 16px; height: 16px; }
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--white);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    .theme-toggle:hover { border-color: var(--green); }
+    .theme-toggle:focus-visible { outline: 3px solid #90bd7a; outline-offset: 3px; }
+    .theme-toggle svg { width: 16px; height: 16px; }
 
     /* Landing-page hero and card that links to the live store. */
     .hero {
@@ -87,10 +131,10 @@
       align-items: center;
       gap: 8px;
       padding: 8px 12px;
-      border: 1px solid #f0d978;
+      border: 1px solid var(--badge-border);
       border-radius: 99px;
-      background: #fff8dc;
-      color: #594800;
+      background: var(--badge-bg);
+      color: var(--badge-ink);
       font-size: 11px;
       font-weight: 750;
       letter-spacing: .45px;
@@ -112,7 +156,7 @@
     .order-card {
       position: relative;
       padding: 28px;
-      border: 1px solid rgba(22, 65, 41, .07);
+      border: 1px solid var(--card-border);
       border-radius: 22px;
       background: var(--white);
       box-shadow: var(--shadow);
@@ -131,8 +175,8 @@
       padding: 8px 5px;
       border: 1px solid var(--line);
       border-radius: 11px;
-      background: white;
-      color: #46534b;
+      background: var(--white);
+      color: var(--network-ink);
       font-size: 11px;
       font-weight: 700;
       transition: border-color .16s, background .16s, box-shadow .16s;
@@ -165,12 +209,12 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 22px;
       padding: 23px 28px;
-      border: 1px solid rgba(22, 65, 41, .07);
+      border: 1px solid var(--card-border);
       border-radius: 16px;
-      background: rgba(255,255,255,.72);
+      background: var(--panel-bg);
     }
     .trust-item { display: flex; align-items: center; justify-content: center; gap: 11px; }
-    .trust-icon { display: grid; width: 37px; height: 37px; flex: 0 0 37px; place-items: center; border-radius: 11px; background: #f0f6e8; color: var(--green); }
+    .trust-icon { display: grid; width: 37px; height: 37px; flex: 0 0 37px; place-items: center; border-radius: 11px; background: var(--icon-bg); color: var(--green); }
     .trust-icon svg { width: 18px; height: 18px; }
     .trust-item strong { display: block; font-size: 11px; }
     .trust-item > div > span { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; }
@@ -179,7 +223,7 @@
     .leisure-section {
       margin-top: 28px;
       padding: 24px;
-      border: 1px solid rgba(22, 65, 41, .07);
+      border: 1px solid var(--card-border);
       border-radius: 16px;
       background: var(--white);
       box-shadow: 0 12px 36px rgba(28, 31, 40, .06);
@@ -193,10 +237,10 @@
       height: 700px;
       border: 1px solid var(--line);
       border-radius: 12px;
-      background: #e9efe4;
+      background: var(--game-bg);
     }
 
-    footer { display: flex; justify-content: space-between; gap: 20px; padding: 29px 0; color: #7a867d; font-size: 10px; }
+    footer { display: flex; justify-content: space-between; gap: 20px; padding: 29px 0; color: var(--muted); font-size: 10px; }
     .footer-links { display: flex; flex-wrap: wrap; gap: 16px; }
     .footer-links a:hover { color: var(--green-dark); }
     footer .brand { color: var(--ink); font-size: 13px; }
@@ -213,6 +257,9 @@
       .shell { width: min(100% - 36px, 480px); }
       header { height: 70px; padding: 0 18px; }
       nav a:not(.nav-help) { display: none; }
+      nav { gap: 12px; }
+      .theme-toggle { padding: 8px; }
+      .theme-toggle-label { display: none; }
       .hero { grid-template-columns: 1fr; gap: 30px; padding: 45px 0 34px; }
       h1 { max-width: 440px; font-size: clamp(43px, 12vw, 57px); letter-spacing: -2.7px; }
       .intro { font-size: 14px; }
@@ -245,6 +292,10 @@
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5.5h16v13H4zM4 7l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
           Email support
         </a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15.1Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="theme-toggle-label">Dark mode</span>
+        </button>
       </nav>
     </header>
 
@@ -303,7 +354,7 @@
           <h2 id="leisure-title">Taking a break?</h2>
           <p>Enjoy a quick game of Snake while you’re here.</p>
         </div>
-        <iframe class="snake-game" src="snake.html" title="Play Snake" loading="lazy"></iframe>
+        <iframe class="snake-game" id="snake-game" src="snake.html" title="Play Snake" loading="lazy"></iframe>
       </section>
     </main>
 
@@ -323,6 +374,52 @@
       </div>
     </footer>
   </div>
+  <script>
+    (function () {
+      var themeKey = 'kingsdata-theme';
+      var toggle = document.getElementById('theme-toggle');
+      var game = document.getElementById('snake-game');
 
+      function readTheme() {
+        try {
+          return localStorage.getItem(themeKey) === 'dark' ? 'dark' : 'light';
+        } catch (error) {
+          console.warn('Unable to read the saved theme preference.', error);
+          return 'light';
+        }
+      }
+
+      function saveTheme(theme) {
+        try {
+          localStorage.setItem(themeKey, theme);
+        } catch (error) {
+          console.warn('Unable to save the theme preference.', error);
+        }
+      }
+
+      function setTheme(theme, persist) {
+        if (theme !== 'light' && theme !== 'dark') return;
+        document.documentElement.dataset.theme = theme;
+        toggle.setAttribute('aria-label', 'Switch to ' + (theme === 'dark' ? 'light' : 'dark') + ' theme');
+        toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+        toggle.querySelector('.theme-toggle-label').textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+        if (persist) saveTheme(theme);
+        if (game.contentWindow) {
+          game.contentWindow.postMessage({ type: 'theme-change', theme: theme }, '*');
+        }
+      }
+
+      setTheme(readTheme(), false);
+      toggle.addEventListener('click', function () {
+        setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark', true);
+      });
+      game.addEventListener('load', function () {
+        setTheme(document.documentElement.dataset.theme, false);
+      });
+      window.addEventListener('storage', function (event) {
+        if (event.key === themeKey) setTheme(event.newValue === 'dark' ? 'dark' : 'light', false);
+      });
+    })();
+  </script>
 </body>
 </html>

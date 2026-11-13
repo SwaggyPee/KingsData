@@ -7,6 +7,7 @@
 <style>
 /* Theme colors and app-wide layout settings. */
 :root {
+  color-scheme: light;
   --bg: #e9efe4;
   --board: #cfdcc4;
   --grid: #c3d2b7;
@@ -21,6 +22,7 @@
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
+:root[data-theme="light"] { color-scheme: light; }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #131a15;
@@ -107,6 +109,7 @@ button:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
   var scoreEl = document.getElementById('score'), bestEl = document.getElementById('best');
   var overlay = document.getElementById('overlay'), msg = document.getElementById('msg');
   var startBtn = document.getElementById('start'), pauseBtn = document.getElementById('pause');
+  var themeKey = 'kingsdata-theme';
 
   // Game state variables. snake stores segments, dir is current direction,
   // next is the queued direction, and food tracks the current target.
@@ -122,6 +125,21 @@ button:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 
   // Read a CSS variable value from the document root.
   function css(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+
+  function readTheme() {
+    try {
+      return localStorage.getItem(themeKey) === 'dark' ? 'dark' : 'light';
+    } catch (error) {
+      console.warn('Unable to read the saved theme preference.', error);
+      return 'light';
+    }
+  }
+
+  function setTheme(theme) {
+    if (theme !== 'light' && theme !== 'dark') return;
+    document.documentElement.dataset.theme = theme;
+    draw();
+  }
 
   // Reset the game board to a fresh starting snake position.
   function reset() {
@@ -255,9 +273,17 @@ button:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
   // Start button triggers the first game round.
   startBtn.addEventListener('click', start);
   pauseBtn.addEventListener('click', togglePause);
+  window.addEventListener('message', function (event) {
+    if (event.source !== window.parent || !event.data || event.data.type !== 'theme-change') return;
+    setTheme(event.data.theme);
+  });
+  window.addEventListener('storage', function (event) {
+    if (event.key === themeKey) setTheme(event.newValue === 'dark' ? 'dark' : 'light');
+  });
 
   // Initialize the first render before the user starts playing.
-  reset(); draw();
+  reset();
+  setTheme(readTheme());
 })();
 </script>
 </body>
