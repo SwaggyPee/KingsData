@@ -22,6 +22,7 @@
       --shadow: 0 24px 70px rgba(28, 31, 40, .1);
       --card-border: rgba(22, 65, 41, .07);
       --nav-ink: #536159;
+      --network-ink: #46534b;
       --badge-bg: #fff8dc;
       --badge-border: #f0d978;
       --badge-ink: #594800;
@@ -38,6 +39,7 @@
       --shadow: 0 24px 70px rgba(0, 0, 0, .35);
       --card-border: rgba(220, 245, 225, .12);
       --nav-ink: #c1ccc3;
+      --network-ink: #e2ebe3;
       --badge-bg: #302d1d;
       --badge-border: #675a24;
       --badge-ink: #f4dc79;
@@ -158,6 +160,23 @@
     .card-heading { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 22px; }
     .card-heading h2 { margin: 0; font-size: 19px; letter-spacing: -.55px; }
     .card-heading p { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
+    .networks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-bottom: 19px; }
+    .network {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 5px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--white);
+      color: var(--network-ink);
+      font-size: 11px;
+      font-weight: 700;
+      transition: border-color .16s, background .16s, box-shadow .16s;
+    }
+    .network-logo { display: block; width: 30px; height: 30px; flex: 0 0 30px; object-fit: contain; }
     .buy-button {
       display: flex;
       width: 100%;
@@ -268,6 +287,12 @@
               <h2 id="order-title">Shop data bundles</h2>
               <p>Browse live bundles and complete your order in the King'sData store.</p>
             </div>
+          </div>
+
+          <div class="networks" aria-label="Networks on the King'sData store">
+            <div class="network"><img class="network-logo" src="https://smartdatahubgh.com/storage/logos/networks/network-9d33700e-a284-436e-a01d-fb16b1595ac3-1771251267.jpeg" alt="" referrerpolicy="no-referrer"> MTN</div>
+            <div class="network"><img class="network-logo" src="https://smartdatahubgh.com/storage/logos/networks/network-05ef0777-4590-42bd-ab1a-cd9bdd658ed9-1771278323.png" alt="" referrerpolicy="no-referrer"> AirtelTigo</div>
+            <div class="network"><img class="network-logo" src="https://smartdatahubgh.com/storage/logos/networks/network-cabfdeff-49e5-4ad8-83e7-b8b39954e3bb-1771278269.png" alt="" referrerpolicy="no-referrer"> Vodafone</div>
           </div>
 
           <!-- The linked store handles bundle selection, checkout, and payment. -->
