@@ -22,12 +22,9 @@
       --shadow: 0 24px 70px rgba(28, 31, 40, .1);
       --card-border: rgba(22, 65, 41, .07);
       --nav-ink: #536159;
-      --network-ink: #46534b;
       --badge-bg: #fff8dc;
       --badge-border: #f0d978;
       --badge-ink: #594800;
-      --panel-bg: rgba(255,255,255,.72);
-      --icon-bg: #f0f6e8;
       --game-bg: #e9efe4;
     }
 
@@ -41,12 +38,9 @@
       --shadow: 0 24px 70px rgba(0, 0, 0, .35);
       --card-border: rgba(220, 245, 225, .12);
       --nav-ink: #c1ccc3;
-      --network-ink: #e2ebe3;
       --badge-bg: #302d1d;
       --badge-border: #675a24;
       --badge-ink: #f4dc79;
-      --panel-bg: rgba(28,37,30,.8);
-      --icon-bg: #28372b;
       --game-bg: #131a15;
     }
 
@@ -164,25 +158,6 @@
     .card-heading { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 22px; }
     .card-heading h2 { margin: 0; font-size: 19px; letter-spacing: -.55px; }
     .card-heading p { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
-    /* Static network cards preview the choices available in the live store. */
-    .networks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-bottom: 19px; }
-    .network {
-      min-height: 58px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 8px 5px;
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      background: var(--white);
-      color: var(--network-ink);
-      font-size: 11px;
-      font-weight: 700;
-      transition: border-color .16s, background .16s, box-shadow .16s;
-    }
-    .network-logo { display: block; width: 30px; height: 30px; flex: 0 0 30px; object-fit: contain; }
-
     .buy-button {
       display: flex;
       width: 100%;
@@ -203,23 +178,7 @@
     .buy-button svg { width: 16px; height: 16px; }
     .card-footnote { margin: 12px 0 0; color: #89938b; font-size: 10px; text-align: center; }
 
-    /* Trust highlights, leisure game, and footer. */
-    .trust-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-      padding: 23px 28px;
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      background: var(--panel-bg);
-    }
-    .trust-item { display: flex; align-items: center; justify-content: center; gap: 11px; }
-    .trust-icon { display: grid; width: 37px; height: 37px; flex: 0 0 37px; place-items: center; border-radius: 11px; background: var(--icon-bg); color: var(--green); }
-    .trust-icon svg { width: 18px; height: 18px; }
-    .trust-item strong { display: block; font-size: 11px; }
-    .trust-item > div > span { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; }
-    .trust-item a { text-decoration: underline; text-underline-offset: 2px; }
-
+    /* Leisure game and footer. */
     .leisure-section {
       margin-top: 28px;
       padding: 24px;
@@ -256,7 +215,6 @@
     @media (max-width: 700px) {
       .shell { width: min(100% - 36px, 480px); }
       header { height: 70px; padding: 0 18px; }
-      nav a:not(.nav-help) { display: none; }
       nav { gap: 12px; }
       .theme-toggle { padding: 8px; }
       .theme-toggle-label { display: none; }
@@ -264,8 +222,6 @@
       h1 { max-width: 440px; font-size: clamp(43px, 12vw, 57px); letter-spacing: -2.7px; }
       .intro { font-size: 14px; }
       .order-card { padding: 23px 20px; }
-      .trust-row { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
-      .trust-item { justify-content: flex-start; }
       .leisure-section { padding: 18px 14px; }
       .snake-game { height: 680px; }
       footer { flex-direction: column; align-items: flex-start; padding: 24px 0; }
@@ -286,8 +242,6 @@
         <span>King's<span>Data</span></span>
       </a>
       <nav aria-label="Main navigation">
-        <a href="#how-it-works">How it works</a>
-        <a href="#networks">Networks</a>
         <a class="nav-help" href="mailto:emmanuelohene98771@gmail.com">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5.5h16v13H4zM4 7l8 6 8-6" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
           Email support
@@ -316,13 +270,6 @@
             </div>
           </div>
 
-          <!-- Use the same public network logo assets displayed by the store. -->
-          <div class="networks" id="networks" aria-label="Networks on the King'sData store">
-            <div class="network"><img class="network-logo" src="https://smartdatahubgh.com/storage/logos/networks/network-9d33700e-a284-436e-a01d-fb16b1595ac3-1771251267.jpeg" alt="" referrerpolicy="no-referrer"> MTN</div>
-            <div class="network"><img class="network-logo" src="https://smartdatahubgh.com/storage/logos/networks/network-05ef0777-4590-42bd-ab1a-cd9bdd658ed9-1771278323.png" alt="" referrerpolicy="no-referrer"> AirtelTigo</div>
-            <div class="network"><img class="network-logo" src="https://smartdatahubgh.com/storage/logos/networks/network-cabfdeff-49e5-4ad8-83e7-b8b39954e3bb-1771278269.png" alt="" referrerpolicy="no-referrer"> Vodafone</div>
-          </div>
-
           <!-- The linked store handles bundle selection, checkout, and payment. -->
           <a class="buy-button" href="https://king-sdata.quickdatabundle.com/">
               Browse bundles on King'sData
@@ -330,22 +277,6 @@
           </a>
           <p class="card-footnote">Choose your bundle and complete payment on the store.</p>
         </section>
-      </section>
-
-      <!-- Practical details replace unverified ratings and privacy claims. -->
-      <section class="trust-row" id="how-it-works" aria-label="How to shop with King'sData">
-        <div class="trust-item">
-          <span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2 5 13h6l-1 9 9-12h-6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
-          <div><strong>Current bundles</strong><span>See available offers in the store</span></div>
-        </div>
-        <div class="trust-item">
-          <span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13m-5-5 5 5-5 5M4 5v14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <div><strong>Store checkout</strong><span>Orders and payments happen there</span></div>
-        </div>
-        <div class="trust-item">
-          <span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v14H4zM4 7l8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
-          <div><strong>Need help?</strong><span><a href="mailto:emmanuelohene98771@gmail.com">Email support</a></span></div>
-        </div>
       </section>
 
       <!-- Embedded Snake game for visitors who want a casual break. -->
@@ -368,7 +299,6 @@
       <span>© 2026 King'sData Ghana. Orders and payments are completed on the King'sData store.</span>
       <!-- The store publishes its policy links in its own footer. -->
       <div class="footer-links">
-        <a href="#networks">Networks</a>
         <a href="mailto:emmanuelohene98771@gmail.com">Email support</a>
         <a href="https://king-sdata.quickdatabundle.com/" target="_blank" rel="noopener noreferrer" aria-label="Open the King'sData store to view its Privacy Policy and Terms of Service">Privacy &amp; terms on store</a>
       </div>
