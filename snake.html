@@ -111,9 +111,9 @@ button:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
   var startBtn = document.getElementById('start'), pauseBtn = document.getElementById('pause');
   var themeKey = 'kingsdata-theme';
 
-  // Game state variables. snake stores segments, dir is current direction,
-  // next is the queued direction, and food tracks the current target.
-  var snake, dir, next, food, score, timer, running = false, paused = false;
+  // Game state variables. countingDown tracks the delay before play or resume;
+  // snake stores segments, dir is current direction, next is the queued move.
+  var snake, dir, next, food, score, timer, countdownTimer, running = false, countingDown = false, paused = false;
   var best = 0;
 
   // Restore the saved best score if the browser has one.
@@ -158,15 +158,43 @@ button:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
     food = free.length ? free[Math.floor(Math.random() * free.length)] : null;
   }
 
-  // Start a new game round. This resets the board and begins the timer loop.
-  function start() {
-    reset(); running = true; paused = false;
-    pauseBtn.disabled = false;
+  // Show the shared 3-2-1 overlay, then run the start or resume callback.
+  function countdown(onComplete) {
+    countingDown = true;
+    startBtn.disabled = true;
+    pauseBtn.disabled = true;
     updatePauseButton();
-    overlay.hidden = true;
-    clearInterval(timer);
-    timer = setInterval(tick, 120);
+    overlay.hidden = false;
+    var count = 3;
+    msg.textContent = count;
     draw();
+    countdownTimer = setInterval(function () {
+      count--;
+      if (count > 0) {
+        msg.textContent = count;
+        return;
+      }
+      clearInterval(countdownTimer);
+      countingDown = false;
+      overlay.hidden = true;
+      onComplete();
+      startBtn.disabled = false;
+      pauseBtn.disabled = !running;
+      updatePauseButton();
+    }, 1000);
+  }
+
+  // Reset the board, then begin a new round when the countdown ends.
+  function start() {
+    if (running || countingDown) return;
+    reset();
+    paused = false;
+    updatePauseButton();
+    countdown(function () {
+      running = true;
+      clearInterval(timer);
+      timer = setInterval(tick, 120);
+    });
   }
 
   function updatePauseButton() {
@@ -174,9 +202,14 @@ button:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
     pauseBtn.setAttribute('aria-pressed', paused ? 'true' : 'false');
   }
 
+  // Pause immediately; resume only after the countdown ends.
   function togglePause() {
-    if (!running) return;
-    paused = !paused;
+    if (!running || countingDown) return;
+    if (paused) {
+      countdown(function () { paused = false; });
+      return;
+    }
+    paused = true;
     updatePauseButton();
   }
 
@@ -253,7 +286,7 @@ button:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
     var map = { arrowup: 'up', w: 'up', arrowdown: 'down', s: 'down', arrowleft: 'left', a: 'left', arrowright: 'right', d: 'right' };
     if (map[k]) { e.preventDefault(); steer(map[k]); }
     else if (k === ' ' && running) { e.preventDefault(); togglePause(); }
-    else if (k === 'enter' && !running && document.activeElement !== startBtn) start();
+    else if (k === 'enter' && !running && !countingDown && document.activeElement !== startBtn) start();
   });
 
   // Button controls for touch and mouse-friendly play.
@@ -270,7 +303,7 @@ button:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
     steer(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up'));
   }, { passive: true });
 
-  // Start button triggers the first game round.
+  // Start button begins the countdown for a new game round.
   startBtn.addEventListener('click', start);
   pauseBtn.addEventListener('click', togglePause);
   window.addEventListener('message', function (event) {
