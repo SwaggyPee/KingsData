@@ -128,10 +128,12 @@ button:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 
   function readTheme() {
     try {
-      return localStorage.getItem(themeKey) === 'dark' ? 'dark' : 'light';
+      var savedTheme = localStorage.getItem(themeKey);
+      if (savedTheme === 'dark' || savedTheme === 'light') return savedTheme;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     } catch (error) {
       console.warn('Unable to read the saved theme preference.', error);
-      return 'light';
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
   }
 
@@ -310,8 +312,13 @@ button:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
     if (event.source !== window.parent || !event.data || event.data.type !== 'theme-change') return;
     setTheme(event.data.theme);
   });
+  // Follow the system theme when the shared override is removed.
   window.addEventListener('storage', function (event) {
-    if (event.key === themeKey) setTheme(event.newValue === 'dark' ? 'dark' : 'light');
+    if (event.key !== themeKey) return;
+    var theme = event.newValue === 'dark' || event.newValue === 'light'
+      ? event.newValue
+      : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    setTheme(theme);
   });
 
   // Initialize the first render before the user starts playing.
