@@ -4,13 +4,28 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f6f8">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    // Apply a saved scheme before rendering to avoid a flash of the wrong theme.
+    (function () {
+      var savedTheme = null;
+      try { savedTheme = localStorage.getItem('kingsdata-theme'); } catch (error) {}
+      var resolvedTheme = savedTheme === 'dark' || savedTheme === 'light'
+        ? savedTheme
+        : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.dataset.theme = resolvedTheme;
+      document.querySelector('meta[name="color-scheme"]').content = savedTheme === 'dark' || savedTheme === 'light'
+        ? savedTheme
+        : 'light dark';
+    })();
+  </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6756761759004140"
      crossorigin="anonymous"></script>
   <title>King'sData Ghana — Data, made easy</title>
   <style>
-    /* Shared colors keep the landing page close to the live store's palette. */
+    /* Shared theme colors keep the landing page close to the live store's palette. */
     :root {
-      color-scheme: light;
+      color-scheme: light dark;
       --ink: #202127;
       --muted: #6d727d;
       --green: #08bf52;
@@ -46,6 +61,25 @@
       --game-bg: #131a15;
     }
 
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --ink: #edf0eb;
+        --muted: #a9b2aa;
+        --paper: #131914;
+        --white: #1c251e;
+        --line: #39443b;
+        --shadow: 0 24px 70px rgba(0, 0, 0, .35);
+        --card-border: rgba(220, 245, 225, .12);
+        --nav-ink: #c1ccc3;
+        --network-ink: #e2ebe3;
+        --badge-bg: #302d1d;
+        --badge-border: #675a24;
+        --badge-ink: #f4dc79;
+        --game-bg: #131a15;
+      }
+    }
+
     * { box-sizing: border-box; }
 
     html { overflow-x: clip; }
@@ -63,7 +97,22 @@
     button { cursor: pointer; }
     a { color: inherit; text-decoration: none; }
 
-    /* Header and centered page layout. */
+    .skip-link {
+      position: fixed;
+      z-index: 1000;
+      top: 12px;
+      left: 12px;
+      transform: translateY(-150%);
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: var(--ink);
+      color: var(--paper);
+      font-weight: 750;
+    }
+    .skip-link:focus { transform: translateY(0); }
+    .skip-link:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+
+    /* Header, navigation, and centered page shell. */
     .shell { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
 
     /* Stretch the header to the viewport while aligning its contents to the page shell. */
@@ -113,7 +162,7 @@
     .theme-toggle:focus-visible { outline: 3px solid #90bd7a; outline-offset: 3px; }
     .theme-toggle svg { width: 16px; height: 16px; }
 
-    /* Landing-page hero and card that links to the live store. */
+    /* Hero copy and the card that links to the live store. */
     .hero {
       display: grid;
       grid-template-columns: 1fr 440px;
@@ -141,7 +190,7 @@
     h1 {
       max-width: 570px;
       margin: 23px 0 17px;
-      font-size: clamp(42px, 5.2vw, 65px);
+      font-size: clamp(2.625rem, 1rem + 5vw, 4.0625rem);
       line-height: 1.03;
       letter-spacing: -3.4px;
       font-weight: 760;
@@ -197,7 +246,7 @@
     .buy-button svg { width: 16px; height: 16px; }
     .card-footnote { margin: 12px 0 0; color: #89938b; font-size: 10px; text-align: center; }
 
-    /* Leisure game and footer. */
+    /* Embedded game and page footer. */
     .leisure-section {
       margin-top: 28px;
       padding: 24px;
@@ -212,7 +261,7 @@
     .snake-game {
       display: block;
       width: 100%;
-      height: 700px;
+      height: clamp(520px, 70dvh, 700px);
       border: 1px solid var(--line);
       border-radius: 12px;
       background: var(--game-bg);
@@ -229,20 +278,21 @@
     @media (max-width: 850px) {
       .hero { grid-template-columns: 1fr 400px; gap: 28px; }
       nav { gap: 20px; }
-      h1 { font-size: 52px; }
     }
     @media (max-width: 700px) {
       .shell { width: min(100% - 36px, 480px); }
       header { height: 70px; padding: 0 18px; }
       nav { gap: 12px; }
+      .nav-help { font-size: 0; }
+      .nav-help svg { width: 18px; height: 18px; }
       .theme-toggle { padding: 8px; }
       .theme-toggle-label { display: none; }
       .hero { grid-template-columns: 1fr; gap: 30px; padding: 45px 0 34px; }
-      h1 { max-width: 440px; font-size: clamp(43px, 12vw, 57px); letter-spacing: -2.7px; }
+      h1 { max-width: 440px; font-size: clamp(2.6875rem, 1.25rem + 8vw, 3.5625rem); letter-spacing: -2.7px; }
       .intro { font-size: 14px; }
       .order-card { padding: 23px 20px; }
       .leisure-section { padding: 18px 14px; }
-      .snake-game { height: 680px; }
+      .snake-game { height: clamp(520px, 72dvh, 680px); }
       footer { flex-direction: column; align-items: flex-start; padding: 24px 0; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -251,6 +301,8 @@
   </style>
 </head>
 <body>
+  <!-- A keyboard skip link provides direct access past the site header. -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <div class="shell">
     <!-- Site logo and navigation links. -->
     <header>
@@ -272,7 +324,7 @@
       </nav>
     </header>
 
-    <main>
+    <main id="main-content">
       <!-- Intro copy and a direct link to the live King'sData store. -->
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
@@ -330,49 +382,61 @@
     </footer>
   </div>
   <script>
+    // Synchronize the theme control and embedded game with the page preference.
     (function () {
       var themeKey = 'kingsdata-theme';
       var toggle = document.getElementById('theme-toggle');
       var game = document.getElementById('snake-game');
+      var colorSchemeMeta = document.querySelector('meta[name="color-scheme"]');
+      var systemTheme = matchMedia('(prefers-color-scheme: dark)');
 
       function readTheme() {
         try {
-          return localStorage.getItem(themeKey) === 'dark' ? 'dark' : 'light';
+          var saved = localStorage.getItem(themeKey);
+          return saved === 'dark' || saved === 'light' ? saved : null;
         } catch (error) {
           console.warn('Unable to read the saved theme preference.', error);
-          return 'light';
+          return null;
         }
       }
 
-      function saveTheme(theme) {
+      function setStoredTheme(theme) {
         try {
-          localStorage.setItem(themeKey, theme);
+          if (theme) localStorage.setItem(themeKey, theme);
+          else localStorage.removeItem(themeKey);
         } catch (error) {
           console.warn('Unable to save the theme preference.', error);
         }
       }
 
       function setTheme(theme, persist) {
-        if (theme !== 'light' && theme !== 'dark') return;
-        document.documentElement.dataset.theme = theme;
-        toggle.setAttribute('aria-label', 'Switch to ' + (theme === 'dark' ? 'light' : 'dark') + ' theme');
+        var resolved = theme || (systemTheme.matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = resolved;
+        colorSchemeMeta.content = theme || 'light dark';
+        toggle.setAttribute('aria-label', 'Switch to ' + (resolved === 'dark' ? 'light' : 'dark') + ' theme');
         toggle.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
-        toggle.querySelector('.theme-toggle-label').textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
-        if (persist) saveTheme(theme);
+        toggle.querySelector('.theme-toggle-label').textContent = resolved === 'dark' ? 'Light mode' : 'Dark mode';
+        if (persist) setStoredTheme(theme);
         if (game.contentWindow) {
-          game.contentWindow.postMessage({ type: 'theme-change', theme: theme }, '*');
+          game.contentWindow.postMessage({ type: 'theme-change', theme: resolved }, '*');
         }
       }
 
       setTheme(readTheme(), false);
       toggle.addEventListener('click', function () {
-        setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark', true);
+        var resolved = document.documentElement.dataset.theme;
+        var system = systemTheme.matches ? 'dark' : 'light';
+        var target = resolved === 'dark' ? 'light' : 'dark';
+        setTheme(target === system ? null : target, true);
       });
       game.addEventListener('load', function () {
         setTheme(document.documentElement.dataset.theme, false);
       });
       window.addEventListener('storage', function (event) {
-        if (event.key === themeKey) setTheme(event.newValue === 'dark' ? 'dark' : 'light', false);
+        if (event.key === themeKey) setTheme(event.newValue === 'dark' || event.newValue === 'light' ? event.newValue : null, false);
+      });
+      systemTheme.addEventListener('change', function () {
+        if (!readTheme()) setTheme(null, false);
       });
     })();
   </script>
